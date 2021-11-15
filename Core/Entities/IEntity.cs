@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Entities.Abstract
+namespace Core.Entities
 {
 	//IEntity implement edən class bir databaza cədvəlidir. Çıplak olmasın deyə veririk.
 	public interface IEntity
