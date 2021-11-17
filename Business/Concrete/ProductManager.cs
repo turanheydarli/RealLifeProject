@@ -32,7 +32,11 @@ namespace Business.Concrete
 
 		public IDataResult<List<Product>> GetAll()
 		{
-			return new DataResult<List<Product>>(_productDal.GetAll(),true);
+			if(DateTime.UtcNow.Minute == 17)
+			{
+				return new ErrorDataResult<List<Product>>();
+			}
+			return new DataResult<List<Product>>(_productDal.GetAll(), true);
 		}
 
 		public IDataResult<List<Product>> GetAllByCategoryId(int id)
@@ -43,6 +47,11 @@ namespace Business.Concrete
 		public IDataResult<List<Product>> GetAllByUnitPrice(decimal min, decimal max)
 		{
 			return new SuccessDataResult<List<Product>>(_productDal.GetAll(p => p.UnitPrice >= min && p.UnitPrice <= max));
+		}
+
+		public IDataResult<Product> GetById(int id)
+		{
+			return new SuccessDataResult<Product>(_productDal.Get(p => p.ProductId == id));
 		}
 
 		public IDataResult<List<ProductDetailDto>> GetProductDetails()
